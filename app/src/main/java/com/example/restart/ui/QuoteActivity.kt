@@ -33,19 +33,15 @@ class QuoteActivity : AppCompatActivity() {
             quotes ->
                 val stringBuilder = StringBuilder()
                 quotes.forEach { quote ->
-                    stringBuilder.append("$quote\n\n")
+                    stringBuilder.append("${textDecrypt(quote.quote)} - ${textDecrypt(quote.author)}\n\n")
                 }
                 textView_quotes.text = stringBuilder.toString()
         })
 
         button_add.setOnClickListener {
             if (editText_quotes.text.isNotEmpty() && editText_author.text.isNotEmpty()) {
-                val quote = Quote(editText_quotes.text.toString(), editText_author.text.toString())
+                val quote = Quote(textEncrypt(editText_quotes.text.toString()), textEncrypt(editText_author.text.toString()))
 
-                val encrypted = textEncrypt(editText_quotes.text.toString())
-
-                Log.i("zhy", "encrypt ${editText_quotes.text} to $encrypted")
-                Log.i("zhy", "decrypt $encrypted to ${textDecrypt(encrypted)}")
                 viewModel.addQuote(quote)
 
                 editText_quotes.setText("")
