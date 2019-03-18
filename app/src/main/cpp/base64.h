@@ -1,9 +1,15 @@
-#include <string>
+static const char b64_table[] = {
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+        'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+        'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+        'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+        'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+        'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+        'w', 'x', 'y', 'z', '0', '1', '2', '3',
+        '4', '5', '6', '7', '8', '9', '+', '/'
+};
 
-static const std::string base64_chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "abcdefghijklmnopqrstuvwxyz"
-        "0123456789+/";
-
-std::string base64_encode(unsigned char const* bytes_to_encode, unsigned int in_len);
-std::string base64_decode(std::string const& encoded_string);
+void PrintStart();
+char *b64_encode(const unsigned char *src, size_t len);
+unsigned char *b64_decode_ex(const char *src, size_t len, size_t *decsize);
+unsigned char *b64_decode(const char *src, size_t len);
