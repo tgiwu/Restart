@@ -18,6 +18,7 @@ add_library( # Sets the name of the library.
 
         # Provides a relative path to your source file(s).
         base64.cpp
+        utils.cpp
         native-lib.cpp
         )
 
