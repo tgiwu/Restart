@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.restart.App
 import com.example.restart.R
 import com.example.restart.data.Quote
 import com.example.restart.utilities.InjectorUtils
@@ -22,7 +23,9 @@ class QuoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quote_main)
         initializeUi()
-        Log.i("restart", sayHello())
+//        Log.i("restart", sayHello())
+
+        App.getInstance()?.getClient()?.getCurrentWeather("Paris")
     }
 
     private fun initializeUi() {

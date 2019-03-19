@@ -18,7 +18,7 @@ extern "C" JNIEXPORT jstring JNICALL
          jobject,
          jstring jstr) {
 
-    PrintStart();
+//    PrintStart();
 
     size_t length = (size_t) env ->GetStringUTFLength(jstr);
     unsigned char *c_msg = NULL;
@@ -36,7 +36,7 @@ Java_com_example_restart_ui_QuoteActivity_textDecrypt(
         jobject,
         jstring jstr) {
 
-    PrintStart();
+//    PrintStart();
 
     size_t length = (size_t) env ->GetStringUTFLength(jstr);
 
