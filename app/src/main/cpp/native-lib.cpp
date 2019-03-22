@@ -13,7 +13,7 @@ extern "C" JNIEXPORT jstring JNICALL
  }
 
 extern "C" JNIEXPORT jstring JNICALL
- Java_com_example_restart_ui_QuoteActivity_textEncrypt(
+ Java_com_example_restart_data_FakeQuoteDao_textEncrypt(
          JNIEnv *env,
          jobject,
          jstring jstr) {

@@ -85,8 +85,10 @@ data class Condition(
 }
 
 data class WeatherEntry(
-    val current: Current,
-    val location: Location
+    val current: Current?,
+    val location: Location?,
+    var msg : String? = null,
+    var isSuccess : Boolean = true
 ) {
     override fun toString(): String {
         return "WeatherEntry(current=$current, location=$location)"

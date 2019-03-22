@@ -9,6 +9,7 @@ class FakeQuoteDao {
 
     init {
         quotes.value = quoteList
+        System.loadLibrary("native-lib")
     }
 
     fun  addQuote(quote: Quote) {
@@ -16,5 +17,16 @@ class FakeQuoteDao {
         quotes.value = quoteList
     }
 
-    fun getQuotes() = quotes as LiveData<List<Quote>>
+    fun getQuotesAsLiveData() = quotes as LiveData<List<Quote>>
+
+    fun refreshQuotes(lists : List<Quote>)  {
+
+        quoteList.clear()
+        for (quote in lists) {
+            quoteList.add(Quote(textEncrypt(quote.quote), textEncrypt(quote.author)))
+        }
+        quotes.value = quoteList
+    }
+
+    external fun textEncrypt(str: String): String
 }

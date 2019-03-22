@@ -10,5 +10,4 @@ object InjectorUtils {
         return QuotesViewModelFactory(quoteRepository)
     }
 
-
 }
