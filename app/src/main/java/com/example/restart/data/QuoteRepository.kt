@@ -3,6 +3,9 @@ package com.example.restart.data
 import com.example.restart.net.FakeNetworkError
 import com.example.restart.net.FakeNetworkSuccess
 import com.example.restart.net.Iapis
+import com.example.restart.net.await
+import kotlinx.coroutines.coroutineScope
+import kotlin.coroutines.CoroutineContext
 
 class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
 
@@ -12,7 +15,7 @@ class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
 
     fun getQuoteLiveData() = quoteDao.getQuotesAsLiveData()
 
-    fun refreshQuotes(onStateChange: StateListener) {
+    suspend fun refreshQuotes(onStateChange: StateListener) {
         onStateChange(RefreshState.Loading)
         val  call  = Iapis.refreshQuotes()
         call.addOnResultListener { result ->
@@ -28,7 +31,7 @@ class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
         }
     }
 
-    fun getWeather(onStateChange: StateListener) {
+    suspend fun getWeather(onStateChange: StateListener) {
         onStateChange(RefreshState.Loading)
         val call = Iapis.getWeather()
         call.addOnResultListener { result ->

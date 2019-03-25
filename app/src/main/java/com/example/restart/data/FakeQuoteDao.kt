@@ -13,7 +13,7 @@ class FakeQuoteDao {
     }
 
     fun  addQuote(quote: Quote) {
-        quoteList.add(quote)
+        quoteList.add(Quote(textEncrypt(quote.quote), textEncrypt(quote.author)))
         quotes.value = quoteList
     }
 
@@ -29,4 +29,6 @@ class FakeQuoteDao {
     }
 
     external fun textEncrypt(str: String): String
+    external fun textDecrypt(str: String): String
+
 }

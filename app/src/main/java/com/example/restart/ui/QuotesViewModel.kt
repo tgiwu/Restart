@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.restart.data.Quote
 import com.example.restart.data.QuoteRepository
 import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class QuotesViewModel(private val quoteRepository: QuoteRepository) : ViewModel() {
     private val viewModelJob = Job()
@@ -12,19 +13,23 @@ class QuotesViewModel(private val quoteRepository: QuoteRepository) : ViewModel(
 
     val quotes = quoteRepository.getQuoteLiveData()
 
-    fun refreshQuotes() = quoteRepository.refreshQuotes {
-        when(it) {
-            is QuoteRepository.RefreshState.Loading -> Log.i("zhy", "loading")
-            is QuoteRepository.RefreshState.Success -> Log.i("zhy", "success ")
-            is QuoteRepository.RefreshState.Error -> Log.i("zhy", "error ${it.error.message}")
+    fun refreshQuotes(context: CoroutineContext) = CoroutineScope(context).launch {
+        quoteRepository.refreshQuotes {
+            when (it) {
+                is QuoteRepository.RefreshState.Loading -> Log.i("zhy", "loading")
+                is QuoteRepository.RefreshState.Success -> Log.i("zhy", "success ")
+                is QuoteRepository.RefreshState.Error -> Log.i("zhy", "error ${it.error.message}")
+            }
         }
     }
 
-    fun getWeather() = quoteRepository.getWeather {
-        when(it) {
-            is QuoteRepository.RefreshState.Loading -> Log.i("zhy", "weather loading")
-            is QuoteRepository.RefreshState.Success -> Log.i("zhy", "weather success")
-            is QuoteRepository.RefreshState.Error -> Log.i("zhy", "weather error ${it.error.message}")
+    fun getWeather(context: CoroutineContext) = CoroutineScope(context).launch {
+        quoteRepository.getWeather {
+            when (it) {
+                is QuoteRepository.RefreshState.Loading -> Log.i("zhy", "weather loading")
+                is QuoteRepository.RefreshState.Success -> Log.i("zhy", "weather success")
+                is QuoteRepository.RefreshState.Error -> Log.i("zhy", "weather error ${it.error.message}")
+            }
         }
     }
 

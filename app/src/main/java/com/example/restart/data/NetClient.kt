@@ -24,7 +24,6 @@ class NetClient private constructor(apiService: WeatherAPIService) {
     }
 
     suspend fun getCurrentWeather(location: String, lang: String = "en"): WeatherEntry {
-
         val de : Deferred<WeatherEntry> = mApiService.getCurrentWeatherAsync(location, lang)
         return try {
             val entry = de.await()
