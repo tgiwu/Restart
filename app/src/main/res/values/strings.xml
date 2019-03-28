@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Restart</string>
+    <string name="title_activity_weather">WeatherActivity</string>
+    <string name="today_title">Today</string>
+    <string name="future_title">Future</string>
+    <string name="settings_title">Settings</string>
 </resources>

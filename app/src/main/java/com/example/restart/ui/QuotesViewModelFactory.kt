@@ -2,7 +2,7 @@ package com.example.restart.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.restart.data.QuoteRepository
+import com.example.restart.data.quote.QuoteRepository
 
 class QuotesViewModelFactory(private val quoteRepository: QuoteRepository) : ViewModelProvider.NewInstanceFactory(){
 

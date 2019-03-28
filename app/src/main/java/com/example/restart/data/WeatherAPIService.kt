@@ -14,13 +14,16 @@ import retrofit2.http.Query
 interface WeatherAPIService {
 
     @GET("current.json")
-    fun getCurrentWeatherAsync(@Query("q") location : String, @Query("lang") lang: String = "en"): Deferred<WeatherEntry>
+    fun getCurrentWeatherAsync(@Query("q") location: String, @Query("lang") lang: String = "en"): Deferred<WeatherEntryResponse>
+
+    @GET("forecast.json")
+    fun getFutureWeatherAsync(@Query("q") location: String, @Query("days") days: Int, @Query("lang") lang: String = "en"):Deferred<FutureWeatherResponse>
 
     companion object {
         private const val API_KEY = "569d88f9730d4026b7d60206191903"
         private const val WEATHER_BASE_URL = "https://api.apixu.com/v1/"
 
-        operator fun invoke() : WeatherAPIService{
+        operator fun invoke(): WeatherAPIService {
 
             val requestInterceptor = Interceptor {
                 val url = it.request()

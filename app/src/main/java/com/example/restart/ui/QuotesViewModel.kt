@@ -3,7 +3,7 @@ package com.example.restart.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.restart.data.Quote
-import com.example.restart.data.QuoteRepository
+import com.example.restart.data.quote.QuoteRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -24,7 +24,7 @@ class QuotesViewModel(private val quoteRepository: QuoteRepository) : ViewModel(
     }
 
     fun getWeather(context: CoroutineContext) = CoroutineScope(context).launch {
-        quoteRepository.getWeather {
+        quoteRepository.getCurrentWeather {
             when (it) {
                 is QuoteRepository.RefreshState.Loading -> Log.i("zhy", "weather loading")
                 is QuoteRepository.RefreshState.Success -> Log.i("zhy", "weather success")

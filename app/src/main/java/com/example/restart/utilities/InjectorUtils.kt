@@ -1,7 +1,7 @@
 package com.example.restart.utilities
 
-import com.example.restart.data.FakeDataBase
-import com.example.restart.data.QuoteRepository
+import com.example.restart.data.quote.FakeDataBase
+import com.example.restart.data.quote.QuoteRepository
 import com.example.restart.ui.QuotesViewModelFactory
 
 object InjectorUtils {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation"
+            app:startDestination="@id/currentFragment">
+
+    <fragment android:id="@+id/currentFragment" android:name="com.example.restart.ui.CurrentFragment"
+              android:label="@string/today_title" tools:layout="@layout/current_fragment"/>
+    <fragment android:id="@+id/futureFragment" android:name="com.example.restart.ui.FutureFragment"
+              android:label="@string/future_title" tools:layout="@layout/future_fragment"/>
+    <fragment android:id="@+id/settingsFragment" android:name="com.example.restart.ui.SettingsFragment"
+              android:label="@string/settings_title" tools:layout="@layout/settings_fragment"/>
+</navigation>

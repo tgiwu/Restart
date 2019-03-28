@@ -52,11 +52,9 @@ class QuoteActivity : AppCompatActivity(), CoroutineScope {
 
             viewModel.refreshQuotes(coroutineContext)
 
-            Log.i("zhy", "start request weather ${Thread.currentThread().name} - ${Thread.currentThread().id}")
 
-            viewModel.getWeather(coroutineContext)
+//            viewModel.getWeather(coroutineContext)
 
-            Log.i("zhy","request weather")
 //            if (editText_quotes.text.isNotEmpty() && editText_author.text.isNotEmpty()) {
 //                val quote = Quote(textEncrypt(editText_quotes.text.toString()), textEncrypt(editText_author.text.toString()))
 //

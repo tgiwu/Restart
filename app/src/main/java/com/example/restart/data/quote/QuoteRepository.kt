@@ -1,11 +1,11 @@
-package com.example.restart.data
+package com.example.restart.data.quote
 
+import com.example.restart.data.FutureWeatherResponse
+import com.example.restart.data.Quote
+import com.example.restart.data.WeatherEntryResponse
 import com.example.restart.net.FakeNetworkError
 import com.example.restart.net.FakeNetworkSuccess
 import com.example.restart.net.Iapis
-import com.example.restart.net.await
-import kotlinx.coroutines.coroutineScope
-import kotlin.coroutines.CoroutineContext
 
 class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
 
@@ -31,21 +31,35 @@ class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
         }
     }
 
-    suspend fun getWeather(onStateChange: StateListener) {
+    suspend fun getCurrentWeather(onStateChange: StateListener) {
         onStateChange(RefreshState.Loading)
         val call = Iapis.getWeather()
         call.addOnResultListener { result ->
             when(result) {
-                is FakeNetworkSuccess<WeatherEntry> -> {
+                is FakeNetworkSuccess<WeatherEntryResponse> -> {
                     onStateChange(RefreshState.Success)
                 }
-                is FakeNetworkError<WeatherEntry> -> {
+                is FakeNetworkError<WeatherEntryResponse> -> {
                     onStateChange(RefreshState.Error(result.error))
                 }
             }
         }
     }
 
+    suspend fun getFutureWeather(location:String, days:Int, lang:String,onStateChange: StateListener) {
+        onStateChange(RefreshState.Loading)
+        val call = Iapis.getFutureWeather(location, days, lang)
+        call.addOnResultListener { result ->
+            when(result) {
+                is FakeNetworkSuccess<FutureWeatherResponse> -> {
+                    onStateChange(RefreshState.Success)
+                }
+                is FakeNetworkError<FutureWeatherResponse> -> {
+                    onStateChange(RefreshState.Error(result.error))
+                }
+            }
+        }
+    }
 
     sealed class RefreshState{
         object Loading : RefreshState()
@@ -58,7 +72,8 @@ class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
 
         fun getInstance(quoteDao: FakeQuoteDao) =
             instance ?: synchronized(this) {
-                QuoteRepository(quoteDao).also { instance = it }
+                QuoteRepository(quoteDao)
+                    .also { instance = it }
             }
     }
 }

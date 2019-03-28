@@ -2,13 +2,11 @@ package com.example.restart.net
 
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import com.example.restart.App
+import com.example.restart.data.FutureWeatherResponse
 import com.example.restart.data.Quote
-import com.example.restart.data.WeatherEntry
+import com.example.restart.data.WeatherEntryResponse
 import kotlinx.coroutines.*
-import java.util.concurrent.Executors
-import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -33,16 +31,25 @@ suspend fun requestRefreshQuote(): FakeNetworkCall<List<Quote>> {
     return result
 }
 
-suspend fun requestWeather(): FakeNetworkCall<WeatherEntry> {
-    val result = FakeNetworkCall<WeatherEntry>()
-    val entry = App.getInstance()?.getClient()?.getCurrentWeather("beijing")
-    entry?.let {
-        if (it.isSuccess) {
-            result.onSuccess(it)
-        } else {
-            result.onError(Throwable(it.msg))
-        }
-    }
+suspend fun requestCurrentWeather(): FakeNetworkCall<WeatherEntryResponse> {
+    val result = FakeNetworkCall<WeatherEntryResponse>()
+//    val entry = App.getInstance()?.getClient()?.getCurrentWeather("beijing")
+//    if (null == entry?.error) {
+//        result.onSuccess(entry!!)
+//    } else {
+//        result.onError(entry.error!!)
+//    }
+    return result
+}
+
+suspend fun requestFutureWeather(location: String = "beijing", days: Int = 7, lang: String="en") : FakeNetworkCall<FutureWeatherResponse> {
+    val result = FakeNetworkCall<FutureWeatherResponse>()
+//    val entry= App.getInstance()?.getClient()?.getFutureWeather(location, days, lang)
+//    if (null == entry?.error) {
+//        result.onSuccess(entry!!)
+//    } else {
+//        result.onError(entry.error!!)
+//    }
     return result
 }
 
