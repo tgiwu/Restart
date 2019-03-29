@@ -2,7 +2,6 @@ package com.example.restart.data.quote
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.restart.data.Quote
 
 class FakeQuoteDao {
     private val quoteList = mutableListOf<Quote>()

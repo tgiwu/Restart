@@ -1,18 +1,18 @@
 package com.example.restart.ui
 
 import android.util.Log
-import androidx.lifecycle.ViewModel;
-import com.example.restart.data.IWeatherRepository
-import com.example.restart.data.lazyDeferred
+import com.example.restart.data.repository.IWeatherRepository
+import com.example.restart.internal.lazyDeferred
+import com.example.restart.data.provider.IUnitProvider
 
 class CurrentViewModel(
-    private val repository: IWeatherRepository
-) : ViewModel() {
-    val isMetric: Boolean
-        get() = true
+    private val repository: IWeatherRepository,
+    unitSystem: IUnitProvider
+) : WeatherViewModelBase(repository, unitSystem) {
+
     val weather by lazyDeferred {
-        Log.i("zhy", "get current weather")
-        repository.getCurrentWeather(isMetric)
+        Log.i("zhy", "get currentEntry weather")
+        repository.getCurrentWeather(isMetricUnit)
     }
 
 

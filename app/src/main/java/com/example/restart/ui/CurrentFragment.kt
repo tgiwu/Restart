@@ -2,19 +2,15 @@ package com.example.restart.ui
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 
 import com.example.restart.R
-import com.example.restart.data.CurrentWeatherViewModelFactory
 import kotlinx.android.synthetic.main.current_fragment.*
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.closestKodein
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 

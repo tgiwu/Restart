@@ -1,8 +1,8 @@
 package com.example.restart.data.quote
 
-import com.example.restart.data.FutureWeatherResponse
-import com.example.restart.data.Quote
-import com.example.restart.data.WeatherEntryResponse
+import com.example.restart.data.network.response.CurrentResponse
+import com.example.restart.data.network.response.FutureResponse
+//import com.example.restart.data.WeatherEntryResponse
 import com.example.restart.net.FakeNetworkError
 import com.example.restart.net.FakeNetworkSuccess
 import com.example.restart.net.Iapis
@@ -36,10 +36,10 @@ class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
         val call = Iapis.getWeather()
         call.addOnResultListener { result ->
             when(result) {
-                is FakeNetworkSuccess<WeatherEntryResponse> -> {
+                is FakeNetworkSuccess<CurrentResponse> -> {
                     onStateChange(RefreshState.Success)
                 }
-                is FakeNetworkError<WeatherEntryResponse> -> {
+                is FakeNetworkError<CurrentResponse> -> {
                     onStateChange(RefreshState.Error(result.error))
                 }
             }
@@ -51,10 +51,10 @@ class QuoteRepository private constructor(private val quoteDao: FakeQuoteDao){
         val call = Iapis.getFutureWeather(location, days, lang)
         call.addOnResultListener { result ->
             when(result) {
-                is FakeNetworkSuccess<FutureWeatherResponse> -> {
+                is FakeNetworkSuccess<FutureResponse> -> {
                     onStateChange(RefreshState.Success)
                 }
-                is FakeNetworkError<FutureWeatherResponse> -> {
+                is FakeNetworkError<FutureResponse> -> {
                     onStateChange(RefreshState.Error(result.error))
                 }
             }

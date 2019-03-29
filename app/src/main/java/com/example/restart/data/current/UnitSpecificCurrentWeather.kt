@@ -1,4 +1,4 @@
-package com.example.restart.data
+package com.example.restart.data.current
 
 interface UnitSpecificCurrentWeather {
     val temperature: Double

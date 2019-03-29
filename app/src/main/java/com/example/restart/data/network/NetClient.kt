@@ -1,6 +1,8 @@
-package com.example.restart.data
+package com.example.restart.data.network
 
 import android.util.Log
+import com.example.restart.data.network.response.CurrentResponse
+import com.example.restart.data.network.response.FutureResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.HttpException
 import kotlin.Exception
@@ -21,8 +23,8 @@ class NetClient private constructor(apiService: WeatherAPIService) {
             }
     }
 
-    suspend fun getCurrentWeather(location: String, lang: String = "en"): WeatherEntryResponse {
-        val de : Deferred<WeatherEntryResponse> = mApiService.getCurrentWeatherAsync(location, lang)
+    suspend fun getCurrentWeather(location: String, lang: String = "en"): CurrentResponse? {
+        val de : Deferred<CurrentResponse> = mApiService.getCurrentWeatherAsync(location, lang)
         return try {
             val entry = de.await()
             entry
@@ -31,12 +33,12 @@ class NetClient private constructor(apiService: WeatherAPIService) {
                 Log.i("zhy", "is http ex ${e.response()?.code()}")
                 Log.i("zhy", "http ex ${e.response()?.isSuccessful}")
             }
-            WeatherEntryResponse(error = e)
+            null
         }
     }
 
-    suspend fun getFutureWeather(location: String, days:Int = 7, lang: String = "en") : FutureWeatherResponse {
-        val de: Deferred<FutureWeatherResponse> = mApiService.getFutureWeatherAsync(location, days, lang)
+    suspend fun getFutureWeather(location: String, days:Int = 7, lang: String = "en") : FutureResponse? {
+        val de: Deferred<FutureResponse> = mApiService.getFutureWeatherAsync(location, days, lang)
         return try {
             val entry = de.await()
             entry
@@ -45,7 +47,7 @@ class NetClient private constructor(apiService: WeatherAPIService) {
                 Log.i("zhy", "is http ex ${e.response()?.code()}")
                 Log.i("zhy", "http ex ${e.response()?.isSuccessful}")
             }
-            FutureWeatherResponse(error = e)
+            null
         }
     }
 

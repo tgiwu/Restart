@@ -2,7 +2,7 @@ package com.example.restart.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import com.example.restart.data.Quote
+import com.example.restart.data.quote.Quote
 import com.example.restart.data.quote.QuoteRepository
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext

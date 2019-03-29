@@ -7,8 +7,9 @@
         tools:context=".ui.FutureFragment">
 
     <TextView
+            android:id="@+id/future_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Hello"/>
+            android:text="future"/>
 
 </FrameLayout>

@@ -1,9 +1,9 @@
-package com.example.restart.data
+package com.example.restart.data.current
 
 import androidx.room.ColumnInfo
 
-data class MetricCurrentWeatherEntry(
-    @ColumnInfo(name = "tempC")
+data class ImperialCurrentWeatherEntry(
+    @ColumnInfo(name = "tempF")
     override val temperature: Double,
     @ColumnInfo(name = "condition_text")
     override val conditionText: String,
@@ -13,11 +13,11 @@ data class MetricCurrentWeatherEntry(
     override val windSpeed: Double,
     @ColumnInfo(name = "windDir")
     override val windDirection: String,
-    @ColumnInfo(name = "precipMm")
+    @ColumnInfo(name = "precipIn")
     override val precipitationVolume: String,
-    @ColumnInfo(name = "feelslikeC")
+    @ColumnInfo(name = "feelslikeF")
     override val feelsLikeTemperature: Double,
-    @ColumnInfo(name = "visKm")
+    @ColumnInfo(name = "visMiles")
     override val visibilityDistance: Double
-) :UnitSpecificCurrentWeather {
+) : UnitSpecificCurrentWeather {
 }

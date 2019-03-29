@@ -1,6 +1,8 @@
-package com.example.restart.data
+package com.example.restart.data.network
 
 import android.util.Log
+import com.example.restart.data.network.response.CurrentResponse
+import com.example.restart.data.network.response.FutureResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -14,10 +16,10 @@ import retrofit2.http.Query
 interface WeatherAPIService {
 
     @GET("current.json")
-    fun getCurrentWeatherAsync(@Query("q") location: String, @Query("lang") lang: String = "en"): Deferred<WeatherEntryResponse>
+    fun getCurrentWeatherAsync(@Query("q") location: String, @Query("lang") lang: String = "en"): Deferred<CurrentResponse>
 
     @GET("forecast.json")
-    fun getFutureWeatherAsync(@Query("q") location: String, @Query("days") days: Int, @Query("lang") lang: String = "en"):Deferred<FutureWeatherResponse>
+    fun getFutureWeatherAsync(@Query("q") location: String, @Query("days") days: Int, @Query("lang") lang: String = "en"):Deferred<FutureResponse>
 
     companion object {
         private const val API_KEY = "569d88f9730d4026b7d60206191903"

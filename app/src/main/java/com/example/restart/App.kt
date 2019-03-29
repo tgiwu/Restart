@@ -1,8 +1,16 @@
 package com.example.restart
 
 import android.app.Application
-import android.content.Context
-import com.example.restart.data.*
+import com.example.restart.data.db.WeatherDatabase
+import com.example.restart.data.network.WeatherAPIService
+import com.example.restart.data.network.WeatherNetworkDataSourceImpl
+import com.example.restart.data.provider.IUnitProvider
+import com.example.restart.data.provider.UnitProviderImpl
+import com.example.restart.data.repository.IWeatherRepository
+import com.example.restart.data.repository.WeatherRepositoryImpl
+import com.example.restart.ui.CurrentWeatherViewModelFactory
+import com.example.restart.ui.FutureListWeatherViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -17,13 +25,32 @@ class App: Application(), KodeinAware {
 
         bind() from singleton { WeatherDatabase(instance()) }
         bind() from singleton { instance<WeatherDatabase>().currentWeatherDao() }
+        bind() from singleton { instance<WeatherDatabase>().futureWeatherDao() }
         bind() from singleton { WeatherAPIService() }
-        bind<IWeatherRepository>() with singleton { WeatherRepositoryImpl(instance(), instance()) }
-        bind<WeatherNetworkDataSourceImpl>() with singleton { WeatherNetworkDataSourceImpl(instance()) }
-        bind() from provider { CurrentWeatherViewModelFactory(instance()) }
+        bind<IWeatherRepository>() with singleton {
+            WeatherRepositoryImpl(
+                instance(),
+                instance(),
+                instance()
+            )
+        }
+        bind<WeatherNetworkDataSourceImpl>() with singleton {
+            WeatherNetworkDataSourceImpl(
+                instance()
+            )
+        }
+        bind<IUnitProvider>() with singleton {
+            UnitProviderImpl(
+                instance()
+            )
+        }
+        bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
+        bind() from provider { FutureListWeatherViewModelFactory(instance(), instance()) }
     }
 
     override fun onCreate() {
         super.onCreate()
+        AndroidThreeTen.init(this)
+//        PreferenceManager.setDefaultValues(this, R.)
     }
 }
