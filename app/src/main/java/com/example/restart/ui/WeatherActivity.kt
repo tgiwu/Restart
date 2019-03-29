@@ -27,7 +27,7 @@ class WeatherActivity : AppCompatActivity(), KodeinAware{
 
         setContentView(R.layout.activity_weather)
         setSupportActionBar(toolbar)
-
+        toolbar.navigationIcon = null
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
         bottom_nav.setupWithNavController(navController)

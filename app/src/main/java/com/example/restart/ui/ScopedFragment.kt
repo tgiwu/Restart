@@ -1,7 +1,9 @@
 package com.example.restart.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_weather.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

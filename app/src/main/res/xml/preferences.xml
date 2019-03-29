@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="Weather Location">
+
+        <SwitchPreference
+                android:defaultValue="true"
+                android:title="Use device location"
+                android:summary="Allow the app to get your location"
+                android:disableDependentsState="true"
+                android:key="USE_DEVICE_LOCATION"/>
+
+        <EditTextPreference
+                android:defaultValue="Beijing"
+                android:selectAllOnFocus="true"
+                android:singleLine="true"
+                android:summary="The location for which the weather is displayed"
+                android:title="Location"
+                android:key="CUSTOM_LOCATION"
+                android:dependency="USE_DEVICE_LOCATION"/>
+
+    </PreferenceCategory>
+    <PreferenceCategory
+            android:title="Preference category">
+        <ListPreference
+                android:key="UNIT_SYSTEM"
+                android:title="Unit system"
+                android:summary="%s"
+                android:defaultValue="METRIC"
+                android:entries="@array/unitSystemEntries"
+                android:entryValues="@array/unitSystemValue"
+        />
+
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,6 +1,7 @@
 package com.example.restart
 
 import android.app.Application
+import android.preference.PreferenceManager
 import com.example.restart.data.db.WeatherDatabase
 import com.example.restart.data.network.WeatherAPIService
 import com.example.restart.data.network.WeatherNetworkDataSourceImpl
@@ -51,6 +52,6 @@ class App: Application(), KodeinAware {
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
-//        PreferenceManager.setDefaultValues(this, R.)
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false)
     }
 }
