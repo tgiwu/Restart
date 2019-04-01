@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.example.restart.R
 import com.example.restart.data.future.ImperialFutureWeatherEntry
+import com.example.restart.ui.adapter.FutureListAdapter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.future_fragment.*
@@ -24,6 +28,7 @@ class FutureFragment : ScopedFragment(), KodeinAware {
 
     private val viewModelFactory : FutureListWeatherViewModelFactory by instance()
     private lateinit var viewModel: FutureViewModel
+    private var mAdapter:FutureListAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +40,17 @@ class FutureFragment : ScopedFragment(), KodeinAware {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(FutureViewModel::class.java)
-       bindUI()
+
+        mAdapter?:also {
+            val layoutManager = LinearLayoutManager(context)
+            layoutManager.orientation = RecyclerView.VERTICAL
+            forecast_list_view.layoutManager = LinearLayoutManager(context)
+            mAdapter = FutureListAdapter(context!!)
+            forecast_list_view.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            forecast_list_view.adapter = mAdapter
+        }
+
+        bindUI()
     }
 
     private fun bindUI() = launch(Dispatchers.Main) {
@@ -44,7 +59,7 @@ class FutureFragment : ScopedFragment(), KodeinAware {
         futureWeatherEntries.observe(this@FutureFragment, Observer { weatherEntries ->
             if (null == weatherEntries) return@Observer
 
-            future_text.text = Gson().toJson(weatherEntries, object : TypeToken<List<ImperialFutureWeatherEntry>>() {}.type)
+            mAdapter?.setEntries(weatherEntries)
 
         })
     }

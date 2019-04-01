@@ -5,8 +5,7 @@ import android.preference.PreferenceManager
 import com.example.restart.data.db.WeatherDatabase
 import com.example.restart.data.network.WeatherAPIService
 import com.example.restart.data.network.WeatherNetworkDataSourceImpl
-import com.example.restart.data.provider.IUnitProvider
-import com.example.restart.data.provider.UnitProviderImpl
+import com.example.restart.data.provider.*
 import com.example.restart.data.repository.IWeatherRepository
 import com.example.restart.data.repository.WeatherRepositoryImpl
 import com.example.restart.ui.CurrentWeatherViewModelFactory
@@ -32,6 +31,7 @@ class App: Application(), KodeinAware {
             WeatherRepositoryImpl(
                 instance(),
                 instance(),
+                instance(),
                 instance()
             )
         }
@@ -47,6 +47,7 @@ class App: Application(), KodeinAware {
         }
         bind() from provider { CurrentWeatherViewModelFactory(instance(), instance()) }
         bind() from provider { FutureListWeatherViewModelFactory(instance(), instance()) }
+        bind<IFetchTimeProvider>() with singleton { FetchTimeProviderImpl(instance()) }
     }
 
     override fun onCreate() {

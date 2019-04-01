@@ -6,10 +6,8 @@
         android:layout_height="match_parent"
         tools:context=".ui.FutureFragment">
 
-    <TextView
-            android:id="@+id/future_text"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/forecast_list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="future"/>
-
+            android:layout_height="match_parent"/>
 </FrameLayout>
