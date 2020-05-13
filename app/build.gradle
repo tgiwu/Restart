@@ -11,7 +11,7 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.restart"
+        applicationId "com.air.restart"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -55,6 +55,7 @@ android {
             path "src/main/cpp/CMakeLists.txt"
         }
     }
+    ndkVersion = '21.0.6113669'
 }
 
 dependencies {
